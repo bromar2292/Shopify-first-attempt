@@ -1,0 +1,199 @@
+<div class="index-section" data-section-id="{{ section.id }}" data-section-type="brand">
+<div class="row">
+{% if section.settings.title != blank %}
+      <h2 class="sections">
+        <span>{{ section.settings.title | escape }}</span>
+      </h2>
+{% endif %}
+
+<div class="owl-carousel owl-theme">  
+  {% for block in section.blocks %}
+  <div class='owl-background2'>
+    <div >
+      {% if block.settings.brand_link %}<a href="{{ block.settings.brand_link }}" target="_blank">{% endif %}
+        <img class='owl-img2'src="{{ block.settings.slideshow_image | img_url: '600x600' }}" alt="{{ block.settings.slideshow_image.alt }}">
+       
+      {% if block.settings.brand_link %}</a>{% endif %}
+      
+    </div >
+    <div class='logo-text2'> {% if block.settings.brand_link %}<a href="{{ block.settings.brand_link }}" target="_blank">{% endif %}
+       <h1 class='owl-title'>{{ block.settings.title | escape }}</h1>
+      <p>{{ block.settings.Text | escape }}</p>
+      {% if block.settings.brand_link %}</a>{% endif %} <button class='shop-button'>{{ block.settings.item-name | escape }}</button></div>
+ </div>
+  {% endfor %}  
+  
+</div>
+</div>
+</div>
+
+
+
+{% schema %}
+  {
+    "name": "Brands Slider",
+    "max_blocks": 20,
+    "settings": [
+      {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Our customers"
+		},
+      {
+        "type": "header",
+        "content": "Info"
+      },
+      {
+        "type": "paragraph",
+        "content": "You may upload up to 25 brands"
+      },
+	  {
+        "type": "paragraph",
+        "content": "Try to use the same pixel size for all images. Optimal resolution is minimum 600px width."
+      }
+
+	],
+     "blocks" : [
+      {
+        "type": "brand",
+        "name": "Brand",
+        "settings": [
+      {
+        "type": "header",
+        "content": "Brand"
+      },
+      {
+        "type": "image_picker",
+        "id": "slideshow_image",
+        "label": "Image",
+		"info": "133 x 73px png recommended"
+      },
+{
+        "type": "text",
+        "id": "title",
+        "label": "Text",
+		"info": "Text"
+      },{
+        "type": "text",
+        "id": "Text",
+        "label": "Text",
+		"info": "Text"
+      },
+{
+        "type": "text",
+        "id": "item-name",
+        "label": "Text",
+		"info": "Text"
+      },
+      {
+        "type": "url",
+        "id": "brand_link",
+        "label": "Link URL"
+      }
+	  ]
+ 	 }
+	],
+  "presets": [{
+    "name": "Brand Slideshow 2",
+    "category": "Image",
+    "settings": {
+    },
+    "blocks": [
+      {
+        "type": "brand"
+      },
+      {
+        "type": "brand"
+      },
+      {
+        "type": "brand"
+      },
+      {
+        "type": "brand"
+      }
+    ]
+  }]
+ }
+{% endschema %}
+
+{% stylesheet %}
+<style>
+.owl-carousel .owl-stage {
+  display: flex;
+  align-items: center;
+}
+.owl-stage-outer {
+    padding-bottom: 5%;
+  } 
+ 
+.owl-prev {
+    position: absolute;
+    top: 25%;
+    margin-left: -5% !important;
+    display: block!IMPORTANT;
+    border:0px solid black;
+    font-size: 40px !important;
+	font-weight: 100 !important;
+    
+}
+  
+.owl-next {
+    position: absolute;
+    top: 25%;
+    right: -5% !important;
+    display: block!IMPORTANT;
+    border:0px solid black;
+    font-size: 40px !important;
+	font-weight: 100 !important;
+}
+  
+.fa {
+  
+  padding-bottom: 5px;
+}
+  
+
+  
+  
+@media only screen and (max-width: 600px) {
+    .owl-prev, .owl-next {
+    top: 40%;
+	}
+}
+.active img {
+ border-width: 0px !important;
+}
+  </style>
+ 
+{% endstylesheet %}
+
+
+<script>
+ 
+  $('.owl-carousel').owlCarousel({
+    loop:true,
+    stagePadding: 50,
+    margin:80,
+    nav:true,
+    dots: true,
+    responsive:{
+        0:{
+            items:1,
+          autoplay: true,
+          autoplayTimeout: 3000
+        },
+        600:{
+            items:2
+        },
+        1000:{
+            items:2
+        }
+    }
+    
+})
+ $( ".owl-prev").html('<i class="fa fa-angle-left"></i>');
+ $( ".owl-next").html('<i class="fa fa-angle-right"></i>');
+  
+</script>
+
